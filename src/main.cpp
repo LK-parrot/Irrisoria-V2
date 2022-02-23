@@ -24,7 +24,7 @@ LiquidCrystal_I2C lcd(0x27,20,4);
 ESP32Time rtc;
 RTC_DS1307 RTC;
 Menu_Manager* mm;
-uint8_t EEPROM_ADDRESS = 1, currentValve = 0;
+uint8_t EEPROM_ADDRESS = 1, currentValve = 0, currentBound = 0;
 int8_t offSet = 0;
 uint16_t choice = 0, sub_menu;
 bool Ok;
@@ -537,10 +537,7 @@ void choiceMenu(){
       print("Mod. valv./fasc. ", 0, 1);
       
       while (Ok) {
-        if (mm->getButtonManager()->getMenu()->isPressed()) {
-          delete mm;
-          mm = nullptr;
-          setup();                                                      
+        if (mm->getButtonManager()->getMenu()->isPressed()) {                                       
           Ok = false;
           choice = 400;
         }
@@ -680,9 +677,8 @@ void choiceMenu(){
 
       while (Ok) {
         if (mm->getButtonManager()->getMenu()->isPressed()) {
-          //delete mm;
-          //mm = nullptr;
-          setup();
+          choice = 1000;
+          Ok = false;
         }
         else if (mm->getButtonManager()->getRight()->isPressed()) {
           choice = 400;
@@ -695,6 +691,10 @@ void choiceMenu(){
         delay(300);
       }
 
+      break;
+
+      case 1000:
+      s
       break;
 
   }
