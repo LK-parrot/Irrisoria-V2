@@ -694,7 +694,7 @@ void choiceMenu(){
       break;
 
       case 1000:
-      s
+      
       break;
 
   }
