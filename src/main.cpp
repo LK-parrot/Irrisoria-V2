@@ -20,7 +20,7 @@ void loadPreviousConfig();
 void choiceMenu();
 void setupShift();
 
-LiquidCrystal_I2C lcd(0x27,20,4);
+LiquidCrystal_I2C lcd(0x3F,20,4);//0x3F
 ESP32Time rtc;
 RTC_DS1307 RTC;
 Menu_Manager* mm;
@@ -28,17 +28,27 @@ uint8_t EEPROM_ADDRESS = 1, currentValve = 0, currentBound = 0;
 int8_t offSet = 0;
 uint16_t choice = 0, sub_menu;
 bool Ok;
-DateTime now;//(__DATE__, __TIME__);
 
 void setup() {
   EEPROM.begin(EEPROM_SIZE);
   Serial.begin(115200);
   Wire.begin();
-  //RTC.adjust(DateTime(__DATE__, __TIME__));
-  //RTC.adjust(now);
   mm = new Menu_Manager();
-  now = RTC.now();
-  rtc.setTime(now.second(), now.minute(), now.hour(), now.day(), now.month(), now.year());
+
+
+  RTC.begin();
+  
+  //RTC.adjust(DateTime(__DATE__, __TIME__));
+  DateTime mao {__DATE__, __TIME__};
+  Serial.println("RTC: " + mao.hour());
+  Serial.println(String(mao.hour()));
+  RTC.adjust(DateTime(mao.year(), mao.month(), mao.day(), mao.hour(), mao.minute(), mao.second()));
+  Serial.println("RTC1: " + String(RTC.now().hour()));
+  rtc.setTime(mao.second(), mao.minute(), mao.hour(), mao.day(), mao.month(), mao.year());
+  
+
+
+
   setupShift();
   
   lcd.init();
@@ -61,6 +71,7 @@ void setup() {
 
 }
 void loop() {
+  Serial.println("loop");
   choiceMenu();
 }
 
@@ -424,6 +435,7 @@ void choiceMenu(){
   switch (choice)
   {
   case 0:
+    Serial.println(String(rtc.getTime()));
     print(rtc.getTime(), 0, 0);
 
     //stampare la temparatura
