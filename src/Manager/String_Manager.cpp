@@ -1,4 +1,4 @@
-#include "String_Manager.h"
+#include "..\..\include\Manager\String_Manager.h"
 
 
 Valve* String_Manager::getValves() const{
