@@ -7,10 +7,6 @@
 #include "RTClib.h"
 
 #define EEPROM_SIZE 1024
-#define ST_CP 26
-#define SH_CP 27
-#define DS 25
-#define OUTPUT_ENABLE 14
 
 void print(String, uint8_t, uint8_t);
 void setAmountValves();
@@ -18,7 +14,6 @@ void askBounds();
 bool askSaved();
 void loadPreviousConfig();
 void choiceMenu();
-void setupShift();
 
 LiquidCrystal_I2C lcd(0x3F,20,4);//0x3F
 ESP32Time rtc;
