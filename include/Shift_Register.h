@@ -12,9 +12,8 @@ class ShiftRegister {
     private:
         uint8_t max_output;
     public:
-        ShiftRegister(uint8_t);
-        ~ShiftRegister();
-
+        ShiftRegister(const uint8_t);
+        
         void setMaxOutput(uint8_t); //set Register length
         uint8_t getMaxOutput(void); //return Register length
         void write(uint8_t*);        //write to register byte array

@@ -23,6 +23,7 @@ ShiftRegister::ShiftRegister(uint8_t length){
     setMaxOutput(length);
 }
 
+
 void ShiftRegister::write(uint8_t *array){
     digitalWrite(OUTPUT_ENABLE, HIGH);
     for (int8_t i = getMaxOutput(); i >=0; i--){

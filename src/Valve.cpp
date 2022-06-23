@@ -7,21 +7,11 @@
 
 uint8_t Valve::output[] = {0,0,0,0,0,0,0,0};
 uint8_t Valve::VALVES = 0;
+ShiftRegister *Valve::sr = new ShiftRegister(Valve::MAX_VALVE);
 
 void Valve::writeToRegister(uint8_t value){     //value is 0 or 1 
     output[this->getNumber()] = value;
-    //shift
-    digitalWrite(OUTPUT_ENABLE, HIGH);
-    for (int8_t i = 7; i >=0; i--){
-        digitalWrite(DS, output[i]);
-        digitalWrite(ST_CP, LOW);
-        digitalWrite(SH_CP, HIGH);
-        digitalWrite(SH_CP, LOW);
-        digitalWrite(ST_CP, HIGH);
-        digitalWrite(ST_CP, LOW);
-    }
-    digitalWrite(OUTPUT_ENABLE, LOW);
-
+    sr->write(output);  //shift
 }
 
 bool Valve::isOpen() const {
@@ -85,3 +75,9 @@ Valve::Valve(){
     VALVES++;
 }
 
+Valve::~Valve(){
+    delete bounds;
+    bounds = nullptr;
+    delete sr;
+    sr = nullptr;
+}

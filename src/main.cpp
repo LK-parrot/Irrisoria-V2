@@ -46,11 +46,6 @@ void setup() {
   Serial.println("RTC1: " + String(RTC.now().hour()));
   rtc.setTime(mao.second(), mao.minute(), mao.hour(), mao.day(), mao.month(), mao.year());
   
-
-
-
-  setupShift();
-  
   lcd.init();
   lcd.backlight();
   lcd.clear();
@@ -77,20 +72,6 @@ void loop() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//##############################################################################
-void setupShift(){
-  pinMode(OUTPUT_ENABLE, OUTPUT);
-  digitalWrite(OUTPUT_ENABLE, HIGH);
-  pinMode(ST_CP, OUTPUT);
-  pinMode(SH_CP, OUTPUT);
-  pinMode(DS, OUTPUT);
-  
-  
-  digitalWrite(SH_CP, LOW);
-  digitalWrite(ST_CP, LOW);
-  digitalWrite(DS, LOW);
-  
-}
 //##############################################################################
 void print(String text, int column, int line){
     
