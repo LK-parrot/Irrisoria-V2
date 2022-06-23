@@ -8,7 +8,7 @@
 uint8_t Valve::output[] = {0,0,0,0,0,0,0,0};
 uint8_t Valve::VALVES = 0;
 
-void Valve::writeToRegister(uint8_t value){
+void Valve::writeToRegister(uint8_t value){     //value is 0 or 1 
     output[this->getNumber()] = value;
     //shift
     digitalWrite(OUTPUT_ENABLE, HIGH);
